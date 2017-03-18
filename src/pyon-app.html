@@ -1,0 +1,194 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand" rel="stylesheet">
+
+<link rel="import" href="pyon-imports.html">
+<link rel="import" href="pyon-styles.html">
+
+<dom-module id="pyon-app">
+  <template>
+    <style include="pyon-styles"></style>
+    <style>
+      :host {
+        /*
+        --app-primary-color: #4285f4;
+        --app-secondary-color: black;
+        */
+
+        font-family: 'Quicksand', sans-serif;
+      }
+
+      app-box {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        --app-box-background-front-layer: {
+          background-image: url('../images/background-pink.jpg');
+          background-repeat: no-repeat;
+          background-size: 100%;
+          padding-bottom: 1000px;
+        };
+      }
+
+      /* DRAWER */
+      app-drawer {
+        --app-drawer-content-container: {
+          background-color: white;
+        };
+      }
+
+      /* STUFF */
+      app-header {
+        color: #fff;
+        --app-header-background-rear-layer: {
+          background-color: var(--paper-pink-300);
+        };
+      }
+
+      paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+
+      .title {
+        height: 100vh;
+        box-sizing: border-box;
+        padding: 50px;
+        color: white;
+      }
+
+      .title > h1 {
+        margin-left: 30px;
+        margin-bottom: 20px;
+        font-size: 68px;
+        font-family: 'Pacifico', 'Roboto', 'Noto', sans-serif;
+      }
+
+      .title > h2 {
+        margin-left: 30px;
+        margin-top: 0px;
+        font-size: 20px;
+        font-family: 'Quicksand', sans-serif;
+      }
+
+      .content {
+        margin: 0px 120px 120px;
+      }
+
+      [main-title] {
+        margin-left: 30px;
+        font-weight: 300;
+      }
+
+      h2 { margin: 30px 0 14px; }
+
+      /* mobile layout */
+      @media (max-width: 600px) {
+
+        .content {
+          margin: 254px 10px 10px;
+          box-shadow: none;
+        }
+      }
+    </style>
+
+    <!-- Drawer content -->
+    <app-drawer id="drawer">
+      <!--
+      <app-toolbar></app-toolbar>
+      <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+        <a name="view1" href="/view1">View One</a>
+        <a name="view2" href="/view2">View Two</a>
+        <a name="view3" href="/view3">View Three</a>
+      </iron-selector>
+      -->
+    </app-drawer>
+
+    <app-box
+      id="appBox"
+      effects="parallax-background"
+      effects-config='{"parallax-background": {"scalar": -0.5}}'>
+    </app-box>
+
+    <app-header-layout>
+
+      <app-header fixed id="appHeader">
+        <app-toolbar>
+          <paper-icon-button icon="menu" on-tap="_drawerToggle"></paper-icon-button>
+        </app-toolbar>
+      </app-header>
+
+      <div class="title">
+        <h1 main-title>Pyon Pyon</h1>
+        <h2>Cosplay and Youtube by Haidy Rauch</h2>
+      </div>
+
+      <div class="content">
+        <paper-card heading="About">
+          <div class="card-content">
+            <p>Lorem ipsum dolor sit amet, graeci aeterno conclusionemque cu his, ei eum affert regione repudiare. Mundi prodesset no sea. Dolore quodsi no pro, petentium forensibus per id. Vis ex percipit invidunt, integre insolens definitiones ne mel. Liber mentitum dissentiet id mel, vel zril dolorum temporibus an, forensibus abhorreant pri at. Cu elit intellegam definitiones eam, has salutatus maiestatis ne.</p>
+            <p>Eos ex eirmod nusquam ocurreret. Eros timeam in vel, an eros etiam assentior vix, in nec wisi consectetuer. Cum feugait voluptatibus ad. Everti dolorum mei no, ne diceret feugiat sed, hinc veniam vim ex.</p>
+          </div>
+        </paper-card>
+      </div>
+    </app-header-layout>
+  </template>
+
+  <script>
+    class PyonApp extends Polymer.Element {
+
+      static get is() { return 'pyon-app'; }
+
+      static get properties() {
+        return {
+        };
+      }
+
+      ready() {
+        super.ready();
+
+        /*
+        var appHeader = this.$.appHeader;
+        var appBox = this.$.appBox;
+        var fadeBackgroundEffect = appHeader.createEffect('fade-background');
+
+        window.addEventListener('scroll', function() {
+          var progress = appBox.getScrollState().progress;
+          var isCondensed = progress > 0.25;
+          fadeBackgroundEffect.run(isCondensed ? 1 : 0);
+          appHeader.shadow = isCondensed;
+        });
+        */
+      }
+
+      _drawerToggle() {
+        this.$.drawer.toggle();
+      }
+
+      /*
+      _routePageChanged(page) {
+        if (page === undefined) return;
+        this.page = page || 'view1';
+        this.$.drawer.close();
+      }
+
+      _pageChanged(page) {
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        Polymer.importHref(
+            resolvedPageUrl,
+            null,
+            this._showPage404.bind(this),
+            true);
+      }
+
+      _showPage404() {
+        this.page = 'view404';
+      }
+      */
+    }
+
+    window.customElements.define(PyonApp.is, PyonApp);
+  </script>
+</dom-module>
